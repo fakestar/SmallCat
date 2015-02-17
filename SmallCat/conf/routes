@@ -1,0 +1,22 @@
+# Routes
+# This file defines all application routes (Higher priority routes first)
+# ~~~~
+
+# Home page
+GET     /                                controllers.Application.index()
+GET     /login                           controllers.Application.login(user :String ?= null)
+
+GET     /ws/:room                        controllers.RoomController.ws(room)
+
+GET     /assets/javascripts/stream.js    controllers.RoomController.streamJs(room)
+
+
+# GET  /players/{id}   ... プレイヤーの取得
+# POST /players/{id}   ... プレイヤーの新規作成
+# PUT  /players/{id}   ... プレイヤーの更新
+
+# GET /items/xxx/{id}
+# GET /items/yyy/{id}
+
+# Map static resources from the /public folder to the /assets URL path
+GET     /assets/*file                    controllers.Assets.at(path="/public", file)

@@ -1,0 +1,13 @@
+@()
+<div id="navbar" class="navbar-collapse collapse">
+@if(session.get("user") != null) {
+  <p class="navbar-right">
+    Logged in as @session.get("user") — <a href="@routes.Application.index()">Disconnect</a>
+  </p>
+} else {
+  <form action="@routes.Application.login()" class="navbar-form navbar-right">
+    <input id="user" name="user" type="text" placeholder="user id" class="form-control">
+    <button type="submit" class="btn btn-success">Sign in</button>
+  </form>
+}
+</div><!--/.navbar-collapse -->
