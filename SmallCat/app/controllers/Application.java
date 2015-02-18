@@ -1,10 +1,16 @@
 package controllers;
 
 import play.data.Form;
+import play.data.validation.Constraints;
+import play.filters.csrf.AddCSRFToken;
+import play.filters.csrf.RequireCSRFCheck;
 import play.mvc.Controller;
 import play.mvc.Result;
 import views.html.content;
 import views.html.index;
+import views.html.login;
+
+
 public class Application extends Controller {
 
 	/**
@@ -13,42 +19,47 @@ public class Application extends Controller {
 	public static Result index() {
 		session().clear();
 
-		Form<LoginForm> loginForm = Form.form(LoginForm.class);
-
-		return ok(index.render(loginForm));
+		return ok(index.render());
 	}
 
+	@AddCSRFToken
+	public static Result login() {
 
-	public static Result login(String user) {
+		Form<LoginForm> loginForm = Form.form(LoginForm.class);
 
-		if(user == null || user.trim().equals("")) {
-			flash("error", "Please choose a valid username.");
+		return ok(login.render(loginForm));
+	}
 
-			return redirect(routes.Application.index());
-		} else {
-			session("user", user);
+	public static Result logout() {
+		session().clear();
 
-			return ok(content.render("default"));
-		}
-
+		return ok(index.render());
 	}
 
 	public static class LoginForm {
-		// メールアドレス
+		@Constraints.Required
 		public String id;
-		// パスワード
+
+		@Constraints.Required
 		public String password;
 		// 登録時のもの
 		public String name;
+
+		public void validate() {
+			if(id == null || password == null) {
+				//error
+			}
+		}
 	}
 
+	@RequireCSRFCheck
 	public static Result certify() {
 
 		Form<LoginForm> form = Form.form(LoginForm.class).bindFromRequest();
 
 		if(form.hasErrors()) {
 
-			return redirect(routes.Application.index());
+			return redirect(routes.Application.login());
 		}else {
 			LoginForm loginForm = form.get();
 

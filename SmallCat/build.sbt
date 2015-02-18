@@ -6,6 +6,7 @@ libraryDependencies ++= Seq(
   javaJdbc,
   javaEbean,
   cache,
+  filters,
   "mysql" % "mysql-connector-java" % "5.1.34",
   "com.memetix" % "microsoft-translator-java-api" % "0.6.2"
 )

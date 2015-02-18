@@ -1,0 +1,32 @@
+@(login: play.data.Form[Application.LoginForm])
+
+@main("Sign in") {
+
+  <div class="auth-form-header">
+    <h1>Sign in</h1>
+  </div>
+
+
+  @helper.form(action = routes.Application.certify()) {
+
+    <div class="auth-form-body">
+      @helper.CSRF.formField
+      @if(login.hasGlobalErrors()) {
+        <p class="error">@login.globalError.message</p>
+      }
+      @helper.inputText(
+        field=login("id"),
+        args='_showConstraints -> false,
+             '_label -> "Email",
+             'class -> "form-control",
+             'placeholder  -> "someone@example.com")
+      @helper.inputPassword(
+        field=login("password"),
+        args='_showConstraints -> false,
+             '_label -> "Password",
+             'class -> "form-control",
+             'placeholder -> "password")
+      <input type="submit" class="btn btn-success" value="Sign in">
+    </div>
+  }
+}

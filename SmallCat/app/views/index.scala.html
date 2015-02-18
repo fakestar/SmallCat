@@ -1,6 +1,6 @@
-@(form: play.data.Form[Application.LoginForm])
+@()
 
-@main("login")(form) {
+@main("") {
   @if(flash.containsKey("error")) {
     <div class="alert-message error">
       <p>

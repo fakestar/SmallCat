@@ -4,8 +4,10 @@
 
 # Home page
 GET     /                                controllers.Application.index()
-GET     /login                           controllers.Application.login(user :String ?= null)
-POST    /login                           controllers.Application.certify()
+GET     /login                           controllers.Application.login()
+POST    /session                         controllers.Application.certify()
+
+POST    /logout                          controllers.Application.logout()
 
 GET     /ws/:room                        controllers.RoomController.ws(room)
 

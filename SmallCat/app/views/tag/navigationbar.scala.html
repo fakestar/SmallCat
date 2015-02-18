@@ -1,20 +1,20 @@
-@(form: play.data.Form[Application.LoginForm])
+@()
 
 <div id="navbar" class="navbar-collapse collapse">
 @if(session.get("user") != null) {
   <p class="navbar-right">
     Logged in as @session.get("user") — <a href="@routes.Application.index()">Disconnect</a>
   </p>
+
+    <i class="glyphicon glyphicon-home"></i>
+
+
+
+
 } else {
-  @helper.form(action = routes.Application.certify(),'class -> "navbar-form navbar-right", 'role -> "form") {
-    <div class="form-group">
-    @helper.inputText(form("id"),'_label -> "mailaddress", 'class -> "form-control", 'placeholder  -> "someone@example.com")
-    </div>
-    <div class="form-group">
-    @helper.inputPassword(form("password"),'_label -> "password", 'class -> "form-control", 'placeholder -> "password")
-    </div>
-    <input type="submit" class="btn btn-success" value="login">
-  }
+  <form action="@routes.Application.login()" class="navbar-form navbar-right">
+    <button type="submit" class="btn btn-success">Sign in</button>
+  </form>
 
 }
 </div><!--/.navbar-collapse -->
