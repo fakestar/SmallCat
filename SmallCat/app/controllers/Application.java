@@ -1,5 +1,6 @@
 package controllers;
 
+import play.data.Form;
 import play.mvc.Controller;
 import play.mvc.Result;
 import views.html.content;
@@ -11,7 +12,10 @@ public class Application extends Controller {
 	 */
 	public static Result index() {
 		session().clear();
-		return ok(index.render());
+
+		Form<LoginForm> loginForm = Form.form(LoginForm.class);
+
+		return ok(index.render(loginForm));
 	}
 
 
@@ -29,4 +33,29 @@ public class Application extends Controller {
 
 	}
 
+	public static class LoginForm {
+		// メールアドレス
+		public String id;
+		// パスワード
+		public String password;
+		// 登録時のもの
+		public String name;
+	}
+
+	public static Result certify() {
+
+		Form<LoginForm> form = Form.form(LoginForm.class).bindFromRequest();
+
+		if(form.hasErrors()) {
+
+			return redirect(routes.Application.index());
+		}else {
+			LoginForm loginForm = form.get();
+
+			String user = loginForm.id;
+			session("user", user);
+		}
+
+		return ok(content.render("default"));
+	}
 }

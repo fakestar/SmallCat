@@ -5,6 +5,7 @@
 # Home page
 GET     /                                controllers.Application.index()
 GET     /login                           controllers.Application.login(user :String ?= null)
+POST    /login                           controllers.Application.certify()
 
 GET     /ws/:room                        controllers.RoomController.ws(room)
 

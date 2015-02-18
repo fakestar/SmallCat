@@ -1,4 +1,4 @@
-@(title: String)(content: Html)
+@(title: String)(form: play.data.Form[Application.LoginForm])(content: Html)
 
 <!DOCTYPE html>
 
@@ -28,7 +28,7 @@
           <a class="navbar-brand" href="@routes.Application.index()">SmallCat</a>
         </div><!--/.navbar-header -->
         @*  *@
-        @tag.navigationbar()
+        @tag.navigationbar(form)
       </div><!--/.container -->
     </nav>
 
