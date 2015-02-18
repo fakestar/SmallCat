@@ -31,6 +31,7 @@ public class Application extends Controller {
 	}
 
 	public static Result logout() {
+		System.out.println("logout");
 		session().clear();
 
 		return ok(index.render());

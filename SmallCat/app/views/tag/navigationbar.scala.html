@@ -1,20 +1,44 @@
 @()
 
-<div id="navbar" class="navbar-collapse collapse">
 @if(session.get("user") != null) {
-  <p class="navbar-right">
-    Logged in as @session.get("user") — <a href="@routes.Application.index()">Disconnect</a>
-  </p>
+<div id="navbar" class="navbar-collapse collapse">
+  <div>
+    <ul class="nav navbar-nav">
+      <li class="header-nav-item">
+        <a href="@routes.Application.index()">Send</a>
+      </li>
+      <li class="header-nav-item">
+        <a href="@routes.Application.index()">test2</a>
+      </li>
+      <li class="header-nav-item">
+        <a href="@routes.Application.index()">test3</a>
+      </li>
+    </ul>
+  </div>
 
-    <i class="glyphicon glyphicon-home"></i>
-
-
-
+  <div class="navbar-right">
+    <p class="navbar-text">
+        <a href="@routes.Application.index()">@session.get("user")</a>
+        </p>
+    <ul class="nav navbar-nav">
+      <li class="header-nav-item">
+        <a href="#" aria-label="Sign out" class="header-nav-link notification-indicator tooltipped tooltipped-s">
+          <span class="glyphicon glyphicon-cog"></span>
+        </a>
+      </li>
+      <li class="header-nav-item">
+        <a href="@routes.Application.logout()" aria-label="Sign out" class="header-nav-link notification-indicator tooltipped tooltipped-s">
+          <span class="glyphicon glyphicon-log-out"></span>
+        </a>
+      </li>
+    </ul>
+  </div>
+</div><!--/.navbar-collapse -->
 
 } else {
+<div id="navbar" class="navbar-collapse collapse">
   <form action="@routes.Application.login()" class="navbar-form navbar-right">
     <button type="submit" class="btn btn-success">Sign in</button>
   </form>
-
-}
 </div><!--/.navbar-collapse -->
+}
