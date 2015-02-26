@@ -21,28 +21,21 @@
     <script src="@routes.Assets.at("javascripts/jquery-1.9.0.min.js")" type="text/javascript"></script>
   </head>
   <body>
-    <nav class="navbar navbar-default navbar-fixed-top">
+    <nav class="navbar navbar-inverse navbar-fixed-top">
       <div class="container">
-
         <div class="navbar-header">
           <a class="navbar-brand" href="@routes.Application.index()">SmallCat</a>
         </div><!--/.navbar-header -->
-        @*  *@
         @tag.navigationbar()
       </div><!--/.container -->
     </nav>
 
-    <!-- Main jumbotron for a primary marketing message or call to action -->
-
-    <div class="container">
-      <div class="row">
-        @tag.message()
-        <div class="content">
-          @content
-        </div>
-      </div>
-    </div> <!-- /container -->
+    <div>
+      @tag.message()
+    </div>
+    <div>
+      @content
+    </div>
     @tag.footer()
   </body>
-
 </html>

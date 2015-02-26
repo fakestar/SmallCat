@@ -18,11 +18,11 @@
 
   <div class="navbar-right">
     <p class="navbar-text">
-        <a href="@routes.Application.index()">@session.get("user")</a>
-        </p>
+      <a href="@routes.Application.index()">@session.get("user")</a>
+    </p>
     <ul class="nav navbar-nav">
       <li class="header-nav-item">
-        <a href="#" aria-label="Sign out" class="header-nav-link notification-indicator tooltipped tooltipped-s">
+        <a href="#" aria-label="Setting" class="header-nav-link notification-indicator tooltipped tooltipped-s">
           <span class="glyphicon glyphicon-cog"></span>
         </a>
       </li>
@@ -37,8 +37,13 @@
 
 } else {
 <div id="navbar" class="navbar-collapse collapse">
-  <form action="@routes.Application.login()" class="navbar-form navbar-right">
-    <button type="submit" class="btn btn-success">Sign in</button>
-  </form>
+  <div class="navbar-right">
+    <form action="@routes.Application.login()" class="navbar-form navbar-right">
+      <button type="submit" class="btn btn-default">Sign in</button>
+    </form>
+    <form action="@routes.Application.login()" class="navbar-form navbar-right">
+      <button type="submit" class="btn btn-success">Sign up</button>
+    </form>
+  </div>
 </div><!--/.navbar-collapse -->
 }

@@ -1,66 +1,65 @@
 @(room: String)
 
 @main("command test") {
+<div class="container">
+  <div class="row">
+    <div class="content">
 
-<div class="page-header">
-  <h1>You can test the command</h1>
-</div>
+      <div class="page-header">
+        <h1>You can test the command</h1>
+      </div><!--/.page-header -->
 
-<div id="header">
-  <div class="span12" id="main">
-    <select id="command" class="selectpicker">
-      <option value="Talk">Talk</option>
-      <option value="Translate">Translate</option>
-    </select>
-    <input id="value" name="value" class="input-small" type="text" placeholder="">
-  </div>
-</div>
-
-<div class="content">
-
-  <div id="onError" class="alert-message error">
-    <p>
-      <span></span>
-    </p>
-  </div>
-
-  <div id="onSuccess" class="row">
-    <div class="col-sm-8">
-
-      <div class="panel panel-primary">
-        <div class="panel-heading">
-          <h3 class="panel-title">received data</h3>
+      <div id="header">
+        <div class="span12" id="main">
+          <select id="command" class="selectpicker">
+            <option value="Talk">Talk</option>
+            <option value="Translate">Translate</option>
+          </select>
+          <input id="value" name="value" class="input-small" type="text" placeholder="">
         </div>
-        <div class="panel-body">
-          <div id="messages"></div>
+      </div><!--/.header -->
+
+      <div class="content">
+        <div id="onError" class="alert-message error">
+          <p><span></span></p>
         </div>
-      </div><!--/.panel panel-default -->
+        <div id="onSuccess" class="row">
+          <div class="col-sm-8">
+            <div class="panel panel-default">
+              <div class="panel-heading">
+                <h3 class="panel-title">received data</h3>
+              </div>
+              <div class="panel-body">
+                <div id="messages"></div>
+              </div>
+            </div><!--/.panel panel-default -->
 
-      <div class="panel panel-primary">
-        <div class="panel-heading">
-          <h3 class="panel-title">request command</h3>
-        </div>
-        <div class="panel-body">
-          <div id="request"></div>
-        </div>
-      </div><!--/.panel panel-default -->
+            <div class="panel panel-default">
+              <div class="panel-heading">
+                <h3 class="panel-title">request command</h3>
+              </div>
+              <div class="panel-body">
+                <div id="request"></div>
+              </div>
+            </div><!--/.panel panel-default -->
+          </div><!--/.col-sm-8 -->
 
-    </div><!--/.col-sm-8 -->
+          <div class="col-sm-4">
+            <div class="panel panel-default">
+              <div class="panel-heading">
+                <h3 class="panel-title">members</h3>
+              </div>
+              <div class="panel-body">
+                <ul id="members"></ul>
+              </div>
+            </div><!--/.panel panel-default -->
+          </div><!--/.col-sm-4 -->
 
-    <div class="col-sm-4">
-      <div class="panel panel-primary">
-        <div class="panel-heading">
-          <h3 class="panel-title">members</h3>
-        </div>
-        <div class="panel-body">
-          <ul id="members"></ul>
-        </div>
-      </div>
-    </div><!--/.col-sm-4 -->
+        </div><!--/.onSuccess -->
+      </div><!--/.content -->
 
-  </div><!--/.onSuccess -->
-</div><!--/.content -->
-
-<script type="text/javascript" charset="utf-8" src="@routes.RoomController.streamJs(room)"></script>
-
+      <script type="text/javascript" charset="utf-8" src="@routes.RoomController.streamJs(room)"></script>
+    </div><!--/.content -->
+  </div><!--/.row -->
+</div><!--/.container -->
 }

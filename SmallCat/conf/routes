@@ -13,8 +13,12 @@ GET     /ws/:room                        controllers.RoomController.ws(room)
 
 GET     /assets/javascripts/stream.js    controllers.RoomController.streamJs(room)
 
+GET     /players/:id.json                controllers.UserController.getPlayer(id: Long)
+#GET     /test                            controllers.UserController.getFriend()
 
-# GET  /players/{id}   ... プレイヤーの取得
+GET     /home                            controllers.GameController.home()
+GET     /friend                          controllers.GameController.friendList()
+
 # POST /players/{id}   ... プレイヤーの新規作成
 # PUT  /players/{id}   ... プレイヤーの更新
 
