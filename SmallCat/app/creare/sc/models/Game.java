@@ -3,7 +3,6 @@ package creare.sc.models;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Comparator;
-import java.util.Iterator;
 import java.util.List;
 
 import play.Logger;
@@ -20,7 +19,10 @@ public class Game {
 	// Stage
 
 	public void exec() {
-		Player player = new Player("player1", 100, 25, 10, 20);
+		List<Player> playerList = new ArrayList<Player>();
+		Player player = new Player("player1", 100, 10, 25, 10, 18);
+
+		playerList.add(player);
 
 		Stage stage = new Stage("testStage1");
 
@@ -30,14 +32,16 @@ public class Game {
 			Logger.debug("floor=" + i);
 
 			Floor foolr = stage.getFloor(i);
+
 			for(int j = 0; j < foolr.getMaxBattleCount(); j++) {
 				// 戦闘になるかの判定
 				if(foolr.isEncounter()) {
-					// 戦闘処理
-
 					List<Enemy> enemyList = stage.getEnemyList();
+
 					Logger.debug("battle start...");
-					if(this.battle(player, enemyList)){
+
+					// 戦闘処理
+					if(this.battle(playerList, enemyList)){
 						Logger.debug("player win.");
 					} else {
 						Logger.debug("player lose.");
@@ -56,19 +60,13 @@ public class Game {
 	}
 
 
-	private boolean battle(Player player, List<Enemy> enemyList) {
+	private boolean battle(List<Player> playerList, List<Enemy> enemyList) {
 
 		int turn = 1;
 
 		List<GameCharacter> list = new ArrayList<GameCharacter>();
-		list.add(player);
+		list.addAll(playerList);
 		list.addAll(enemyList);
-
-		player.setEnemyList(enemyList);
-
-		for(GameCharacter enemy : enemyList) {
-			enemy.setTarget(player);
-		}
 
 		while(true) {
 			Logger.debug("turn " + turn);
@@ -76,39 +74,36 @@ public class Game {
 			//行動順でソート
 			Collections.sort(list, comparator);
 
-			Iterator<GameCharacter> iterator = list.iterator();
-			while(iterator.hasNext()) {
-				GameCharacter gameCharacter = iterator.next();
-				// 誰を攻撃するかを決める
-				GameCharacter target = gameCharacter.getTarget();
-				// 攻撃を行う
-				gameCharacter.attacked(target);
+			for(GameCharacter gameCharacter : list) {
+				if(!gameCharacter.isDead()) {
+					Logger.debug("  " + gameCharacter.name + " action. (cost:" + gameCharacter.getActionSpeed() + ")");
 
-				if(target.hp <= 0) {
-					if(target instanceof Player) {
-						return false;
-					} else {
-						enemyList.remove(target);
-						iterator.remove();
+					if(gameCharacter instanceof Player) {
+						GameCharacter target = gameCharacter.getTarget(enemyList);
+						// 攻撃を行う
+						gameCharacter.attack(target);
+
+						if(target.isDead()) {
+							enemyList.remove(target);
+						}
+
+						if(enemyList.isEmpty()) {
+							return true;
+						}
+					 } else {
+						// 誰を攻撃するかを決める
+						GameCharacter target = gameCharacter.getTarget(playerList);
+						// 攻撃を行う
+						gameCharacter.attack(target);
+
+						if(target.isDead()) {
+							return false;
+						}
 					}
+
+					gameCharacter.refresh();
 				}
 			}
-
-//			for(GameCharacter gameCharacter : list) {
-//				// 誰を攻撃するかを決める
-//				GameCharacter target = gameCharacter.getTarget();
-//				// 攻撃を行う
-//				gameCharacter.attacked(target);
-//
-//				if(target.hp <= 0) {
-//					if(target instanceof Player) {
-//						return false;
-//					} else {
-//						enemyList.remove(target);
-//						list.remove(target);
-//					}
-//				}
-//			}
 
 			turn++;
 		}

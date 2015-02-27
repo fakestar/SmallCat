@@ -26,8 +26,8 @@ public class Stage {
 	public List<Enemy> getEnemyList() {
 		List<Enemy> list = new ArrayList<Enemy>();
 
-		list.add(new Enemy("mob1", 30, 15, 10, 18));
-		list.add(new Enemy("mob2", 20,  5, 20, 15));
+		list.add(new Enemy("mob1", 30, 10, 15, 12, 18));
+		list.add(new Enemy("mob2", 20, 10, 12, 18, 15));
 
 		return list;
 	}

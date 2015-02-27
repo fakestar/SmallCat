@@ -1,6 +1,5 @@
 package creare.sc.models;
 
-import java.util.List;
 
 
 
@@ -10,25 +9,38 @@ import java.util.List;
  */
 public class Player extends GameCharacter {
 
-	private List<Enemy> enemyList;
-
-	public Player(String name, int hp, int attack, int defense, int speed) {
-		super(name, hp, attack, defense, speed);
-	}
-
-	public void setEnemyList(List<Enemy> enemyList) {
-		this.enemyList = enemyList;
+	public Player(String name, int maxHp, int maxMp, int atk, int def, int dex) {
+		super(name, maxHp, maxMp, atk, def, dex);
 	}
 
 	@Override
-	public GameCharacter getTarget() {
-		int target = (int) (Math.random() * enemyList.size());
-		return enemyList.get(target);
+	public void action() {
+		// 何をするのかを決める
+		String content = this.getContent();
+		switch (content) {
+			case "ATTACK":
+				// 攻撃
+				// 　→敵単体
+				GameCharacter target = this.getTargetCharacter();
+				this.attack(target);
+				break;
+
+			default:
+				// 魔法
+				// 　→敵単体
+				// 　→敵全体
+				// 　→味方単体
+				// 　→味方全体
+				break;
+		}
+
 	}
 
-	@Override
-	public String toString() {
-		return "Player [hp=" + hp + ", attack=" + attack + ", defense=" + defense + "]";
-	}
+	 private GameCharacter getTargetCharacter() {
+		 return null;
+	 }
 
+	 private String getContent() {
+		 return "ATTACK";
+	 }
 }
